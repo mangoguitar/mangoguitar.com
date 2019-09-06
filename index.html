@@ -28,7 +28,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 p-5">
-                        <h1>Hello World!</h1>
+                <button class="btn btn-outline-success" data-toggle-fullscreen>Toggle Fullscreen</button>
+                <br>
+                <br>
+                <h1>Hello World!</h1>
                 <p>
                         Teaching is the best way of learning. Thats what i heard. So i created this Website to Track my Learning Progress und to help people get Started with learning the Guitar.
                 </p>
@@ -55,6 +58,7 @@
 
                 <b>Docs</b>
                 <ul>
+                    <li>Practice Routine</li>
                     <li><a href="https://docs.google.com/document/d/1xAxRE_qhCz-L0EoLSo911aawx7dB5XjK0wxTbeENISA/edit?usp=sharing" target="_blank">Chord Progressions</a></li>
                     <li><a href="https://docs.google.com/document/d/12Kh8qC0g3Lu21U_CBYJw-HeXw1i6bied6HpWS5lziB0/edit?usp=sharing" target="_blank">Lick Library</a></li>
                 </ul>
@@ -69,6 +73,14 @@
             </div>
             <div class="col-lg-3 p-5">
                 <h1>External Sites</h1>
+
+                <b>Tools</b>
+                <ul>
+                    <li><a href="https://www.fachords.com/tools/fretboard-trainer/" target="_blank">Fretboard Trainer</a></li>
+                    <li><a href="https://www.musictheory.net/" target="_blank">musictheory.net</a></li>
+                    <li><a href="https://www.justinguitar.com/" target="_blank">Justin Guitar</a></li>
+                    <li><a href="https://www.acousterr.com/" target="_blank">acousterr</a></li>
+                </ul>
 
                 <b>Useful Links</b>
                 <ul>
@@ -92,7 +104,6 @@
                 <b>General</b>
                 <ul>
                     <li><a href="/music-albums/index.html">Music Albums</a></li>
-                    <li>Practice Routine</li>
                 </ul>
 
                 <b>Knowledge</b>
@@ -126,5 +137,65 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+    <script>
+        /**
+ * Element.requestFullScreen() polyfill
+ * @author Chris Ferdinandi
+ * @license MIT
+ */
+if (!Element.prototype.requestFullscreen) {
+	Element.prototype.requestFullscreen = Element.prototype.mozRequestFullscreen || Element.prototype.webkitRequestFullscreen || Element.prototype.msRequestFullscreen;
+}
+
+/**
+ * document.exitFullScreen() polyfill
+ * @author Chris Ferdinandi
+ * @license MIT
+ */
+if (!document.exitFullscreen) {
+	document.exitFullscreen = document.mozExitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+}
+
+/**
+ * document.fullscreenElement polyfill
+ * Adapted from https://shaka-player-demo.appspot.com/docs/api/lib_polyfill_fullscreen.js.html
+ * @author Chris Ferdinandi
+ * @license MIT
+ */
+if (!document.fullscreenElement) {
+
+	Object.defineProperty(document, 'fullscreenElement', {
+		get: function() {
+			return document.mozFullScreenElement || document.msFullscreenElement || document.webkitFullscreenElement;
+		}
+	});
+
+	Object.defineProperty(document, 'fullscreenEnabled', {
+		get: function() {
+			return document.mozFullScreenEnabled || document.msFullscreenEnabled || document.webkitFullscreenEnabled;
+		}
+	});
+}
+
+document.addEventListener('click', function (event) {
+
+	// Ignore clicks that weren't on the toggle button
+	if (!event.target.hasAttribute('data-toggle-fullscreen')) return;
+
+	// If there's an element in fullscreen, exit
+	// Otherwise, enter it
+	if (document.fullscreenElement) {
+		document.exitFullscreen();
+	} else {
+		document.documentElement.requestFullscreen();
+	}
+
+}, false);
+    </script>
 </body>
 </html>
